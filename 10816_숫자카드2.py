@@ -8,7 +8,7 @@ n = int(input())
 n_arr = list(map(int,input().split()))
 m = int(input())
 m_arr = list(map(int,input().split()))
-n_arr.sort()
+
 result = [0]*20000001
 
 for i in range(n):
