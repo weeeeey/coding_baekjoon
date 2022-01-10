@@ -19,20 +19,22 @@
             이것을 응용하면 left-right 로 특정 값이 리스트에서 몇번 들어가 있는지 알 수 있다.
                         
 '''
+# 계속 시간 초과가 돼서 이것저것 해보느라 오래걸림
+# d라는 리스트를 처음부터 n 크기 만큼 할당한 후 만졌더니 그리 되어버림
 
+import sys
+input = sys.stdin.readline
 from bisect import bisect_left
 n = int(input())
 arr = list(map(int,input().split()))
-d = [0]*n
-x = []
-d[0] = 1
-x.append(0)
-for i in range(n):
-  if arr[i] > x[-1] :
+d = []
+x = [arr[0]]
+d.append(1) 
+for i in range(1,n):
+  if arr[i] > x[-1]:
+    d.append(d[-1]+1)
     x.append(arr[i])
   else:
-    loc = bisect_left(x,arr[i])
+    x[bisect_left(x,arr[i])] = arr[i]
     
-    x[loc] = arr[i]
-
-print(len(x)-1)
+print(max(d))
